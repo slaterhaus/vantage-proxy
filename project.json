@@ -1,0 +1,28 @@
+{
+  "name": "prices-api",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "prices-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "prices-api:build:development"
+        },
+        "production": {
+          "buildTarget": "prices-api:build:production"
+        }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f Dockerfile . -t prices-api"
+    }
+  },
+  "tags": []
+}
